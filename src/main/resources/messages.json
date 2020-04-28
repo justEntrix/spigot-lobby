@@ -1,0 +1,19 @@
+{
+  "prefix": "§e[§9Lobby§e]",
+  "noPermission": "§cDir fehlt die Berechtigung §l%s, §cden Befehl auszuführen!",
+  "chatCleared": "§7Der Chat wurde von §a%s §7geleert!",
+  "unknownCommand": "§7Unbekannter Befehl",
+  "noPlayer": "§cDu bist kein Spieler!",
+  "buildModeEnabled": "§aBuildmode wurde aktiviert!",
+  "buildModeDisabled": "§cBuildmode wurde deaktiviert!",
+  "ping": "§7Dein Ping: §a%dms",
+  "cannotBuild": "§cDu darfst hier nicht bauen!",
+
+  "joinSettings": {
+    "joinTitle": true,
+    "title": "§b§lWillkommen auf",
+    "subTitle": "§cExampleCraft§7.§6de§7!",
+    "joinMessage": "§8[§a+§8] §7%s",
+    "quitMessage": "§8[§c-§8] §7%s"
+  }
+}

@@ -1,0 +1,12 @@
+name: 'Lobby'
+main: 'io.github.justentrix.lobby.LobbyPlugin'
+version: '1.0.0'
+
+commands:
+  build: { description: 'A simple test command', permission: 'lobby.build' }
+  clearchat: { description: 'Clears the chat.', aliases: ['cc', 'cchat'], permission: 'lobby.clearchat' }
+  ping: { description: 'Get your ping.' }
+
+permissions:
+  lobby.build: { }
+  lobby.clearchat: { }
