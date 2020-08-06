@@ -4,6 +4,7 @@ import io.github.justentrix.lobby.LobbyPlugin;
 import io.github.justentrix.lobby.command.impl.BuildCommand;
 import io.github.justentrix.lobby.command.impl.ClearChatCommand;
 import io.github.justentrix.lobby.command.impl.PingCommand;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.entity.Player;
@@ -19,11 +20,11 @@ public class CommandHandler {
   public CommandHandler(LobbyPlugin plugin) {
     this.plugin = plugin;
 
-    this.commandsByName = new HashMap<>() {{
-      put("build", new BuildCommand(plugin));
-      put("ping", new PingCommand(plugin));
-      put("clearchat", new ClearChatCommand(plugin));
-    }};
+    this.commandsByName = Map.of(
+      "build", new BuildCommand(plugin),
+      "ping", new PingCommand(plugin),
+      "clearchat", new ClearChatCommand(plugin)
+    );
   }
 
   public void initialize() {

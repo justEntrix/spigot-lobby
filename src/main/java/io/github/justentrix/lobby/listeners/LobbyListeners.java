@@ -20,7 +20,6 @@ import org.bukkit.util.Consumer;
 public class LobbyListeners {
 
   private final LobbyPlugin plugin;
-
   private final JsonObject joinSettings;
 
   public LobbyListeners(LobbyPlugin plugin) {
@@ -28,20 +27,13 @@ public class LobbyListeners {
     this.joinSettings = this.plugin.getMessagesDocument().getJson().get("joinSettings").getAsJsonObject();
   }
 
-  private <T extends Event> void registerEvent(Class<T> clazz, Consumer<T> consumer) {
-    EventExecutor executor = (listener, event) -> consumer.accept((T) event);
-
-    this.plugin.getServer().getPluginManager()
-        .registerEvent(clazz, new Listener() {}, EventPriority.NORMAL, executor, this.plugin);
-  }
-
   public void initialize() {
-    this.registerEvent(PlayerQuitEvent.class, (event) -> {
+    this.plugin.registerEvent(PlayerQuitEvent.class, (event) -> {
       var quitMessage = this.joinSettings.get("quitMessage").getAsString();
       event.setQuitMessage(String.format(quitMessage, event.getPlayer().getDisplayName()));
     });
 
-    this.registerEvent(PlayerJoinEvent.class, (event) -> {
+    this.plugin.registerEvent(PlayerJoinEvent.class, (event) -> {
       var joinMessage = this.joinSettings.get("joinMessage").getAsString();
       event.setJoinMessage(String.format(joinMessage, event.getPlayer().getDisplayName()));
 
@@ -56,7 +48,7 @@ public class LobbyListeners {
 
       event.getPlayer().sendTitle(new Title(titleComponent, subTitleComponent));
     });
-    this.registerEvent(UnknownCommandEvent.class, (event) -> {
+    this.plugin.registerEvent(UnknownCommandEvent.class, (event) -> {
       event.setMessage(String.format(this.plugin.getMessage("unknownCommand"), event.getCommandLine()));
     });
   }
