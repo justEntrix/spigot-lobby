@@ -5,8 +5,9 @@ import io.github.justentrix.lobby.command.impl.BuildCommand;
 import io.github.justentrix.lobby.command.impl.ClearChatCommand;
 import io.github.justentrix.lobby.command.impl.PingCommand;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
 import org.bukkit.entity.Player;
 
 /**
@@ -29,12 +30,15 @@ public class CommandHandler {
 
   public void initialize() {
     this.commandsByName.forEach((name, callback) -> {
-      this.plugin.getCommand(name).setExecutor((executor, command, label, arguments) -> {
-        if (!(executor instanceof Player)) {
-          executor.sendMessage(plugin.getMessage("noPlayer"));
-          return true;
+      var command = Objects.requireNonNull(this.plugin.getCommand(name), String.format("Command \"%s\" is not contained in plugin.yml!", name));
+
+      command.setExecutor((executor, cmd, label, arguments) -> {
+        if (executor instanceof Player) {
+          callback.execute((Player) executor, arguments);
         }
-        callback.execute((Player) executor, arguments);
+        else {
+          executor.sendMessage(plugin.getMessage("noPlayer"));
+        }
         return true;
       });
     });
